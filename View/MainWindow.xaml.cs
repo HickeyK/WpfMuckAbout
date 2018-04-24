@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,19 @@ namespace April2018Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        DummyRepository dummyRepository = new DummyRepository();
+        public ObservableCollection<Family> families { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            families = dummyRepository.GetFamilies();
+            DataContext = this;
         }
     }
 }

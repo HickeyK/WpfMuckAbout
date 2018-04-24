@@ -7,6 +7,61 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="Family"/>
+            <ComboBox x:Name ="FamilyNameComboBox" 
+                     Grid.Row="0"
+                     Grid.Column="1"
+                      ItemsSource="{Binding familiess}"
+                      DisplayMemberPath="FamilySummary"/>
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Content="Family Name"/>
+            <TextBox x:Name ="FamilyNameTextBox" 
+                      Grid.Row="1"
+                      Grid.Column="1"
+                      Text="{Binding ElementName=FamilyNameComboBox, Path=SelectedValue.Name}"
+                     />
+
+
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Content="Members"/>
+            <ListBox x:Name ="FamilyMembersListBox" 
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      ItemsSource="{Binding ElementName=FamilyNameComboBox, Path=SelectedValue.FamilyMembers}"
+                      DisplayMemberPath="Name"/>
+
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Content="Toys"/>
+            <ListBox x:Name ="ToyListBox" 
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     ItemsSource="{Binding ElementName=FamilyMembersListBox, Path=SelectedValue.Toys}"
+                     DisplayMemberPath="Name"/>
+        </Grid>
+
+
     </Grid>
 </Window>
